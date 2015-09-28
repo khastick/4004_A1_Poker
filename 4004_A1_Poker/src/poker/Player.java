@@ -9,6 +9,11 @@ public class Player {
 	int[] cards;
 	int id, chips;
 	
+	public int getID(){
+		return id;
+	}
+	
+
 	public int[] getCards(){
 		return cards;
 	}

@@ -1,8 +1,5 @@
 package poker;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 public class Player {
 	static String[] SUIT = {"Hearts", "Spades", "Diamonds", "Clubs" };
 	static String[] RANK = {"One", "Two", "Three", "Four", "Five", "Six", "Seven", 
@@ -22,12 +19,10 @@ public class Player {
 		cards = aCards;
 	}
 	
-	public Player(String aHand){
-		id = 0;
-		chips = 0;
-		cards = new int[5];
-		StringToHand(aHand);
+	public Player(int aId, int[] aHand){
+		this(aId, 0, aHand);
 	}
+
 	
 	public void play(){
 		
@@ -73,29 +68,6 @@ public class Player {
 		}
 	}
 	
-	public String HandToString(){
-		String hand = "";
-		for(int i = 0; i < cards.length; i++){
-			int rankIndex = (int)cards[i] % SUIT_SIZE;
-			int suitIndex = (int)Math.floor(cards[i]/SUIT_SIZE); 
-			hand += RANK[rankIndex] + SUIT[suitIndex] + " ";
-		}
-		return hand.trim();
-	}
-	
-	public void StringToHand(String aHand){
-		String[] handSplit = aHand.split(" ");
-		String[] cardSplit;
-		
-		for(int i = 0; i < cards.length; i++){
-			cardSplit = handSplit[i].split("(?=\\p{Upper})");
-			
-			int groupValue = Arrays.asList(RANK).indexOf(cardSplit[0]) ;
-			int typeValue = Arrays.asList(SUIT).indexOf(cardSplit[1]) * SUIT_SIZE;
-			
-			cards[i] = groupValue + typeValue;
-		}
-		
-	}
+
 
 }

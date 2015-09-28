@@ -78,4 +78,41 @@ public class PokerTest {
 		
 		assertTrue(Arrays.equals(playerCards, someCards));	
 	}
+	
+	@Test
+	public void testDuplicates(){
+		Game game = new Game();
+		String inputHand = "OneHearts TwoHearts AceSpades KingDiamonds EightClubs";							
+		
+		game.addPlayer(0, inputHand);
+		
+		assertTrue(game.addPlayer(1, inputHand) == -1);
+		
+	}
+	
+	@Test
+	public void testMultiplePlayersInvalidID(){
+		Game game = new Game();
+		String inputHand1, inputHand2;
+		
+		inputHand1 = "OneHearts TwoHearts AceSpades KingDiamonds EightClubs";
+		inputHand2 = "ThreeHearts AceClubs QueenSpades QueenDiamonds FiveClubs";
+		
+		game.addPlayer(0, inputHand1);
+		
+		assertTrue(game.addPlayer(0, inputHand2) == -1);		
+	}
+	
+	@Test
+	public void testMultiplePlayersValid(){
+		Game game = new Game();
+		String inputHand1, inputHand2;
+		
+		inputHand1 = "OneHearts TwoHearts AceSpades KingDiamonds EightClubs";
+		inputHand2 = "ThreeHearts AceClubs QueenSpades QueenDiamonds FiveClubs";
+		
+		game.addPlayer(0, inputHand1);
+		
+		assertTrue(game.addPlayer(1, inputHand2) == 0);		
+	}
 }

@@ -29,19 +29,25 @@ public class Game {
 		}
 	}
 	
-	public void addPlayer(int aId, String aHand){
+	public int addPlayer(int aId, String aHand){
 		int[] tHand;		
 		Player player;
 		
 		tHand = StringToHand(aHand);
 		
-		if(tHand[0] == -1){
-			System.out.println("Invalid Input");
-			return;
+		if(tHand[0] == -1){			
+			return -1;
+		}
+		
+		for(Player p : players){
+			if(p.id == aId){
+				return -1;
+			}
 		}
 		
 		player = new Player(aId, tHand);
 		players.add(player);
+		return 0;
 	}
 	
 	public int generateCard(){

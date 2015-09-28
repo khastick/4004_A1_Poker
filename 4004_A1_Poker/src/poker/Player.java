@@ -1,6 +1,7 @@
 package poker;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class Player {
 	static String[] SUIT = {"Hearts", "Spades", "Diamonds", "Clubs" };
@@ -28,6 +29,10 @@ public class Player {
 		StringToHand(aHand);
 	}
 	
+	public void play(){
+		
+	}
+	
 	public int[] Check(){
 		return new int[]{0,0};
 	}
@@ -44,8 +49,28 @@ public class Player {
 		return new int[]{3,0};
 	}
 	
-	public int[] Discard(){
-		return new int[]{};
+	public int[] fold(){
+		return new int[]{4,0};
+	}
+	
+	public int[] discard(int[] index){
+		int[] discarded = new int[index.length];
+		
+		for(int i = 0; i < index.length; i++){
+			discarded[i] = cards[index[i]];
+			cards[index[i]] = -1;
+		}
+		
+		return discarded;
+	}
+	
+	public void replace(int[] hand){		
+		for(int j = 0, i = 0; i < cards.length; i++){			
+				if(cards[i] == -1){
+					cards[i] = hand[j];	
+					++j;
+				}					
+		}
 	}
 	
 	public String HandToString(){

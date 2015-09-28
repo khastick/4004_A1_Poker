@@ -31,4 +31,36 @@ public class PokerTest {
 		
 		assertTrue(inputHand.equals(testHand));
 	}
+	
+	@Test
+	public void testDiscard(){
+		String inputHand = "OneHearts TwoHearts AceSpades KingDiamonds EightClubs";
+		Player player = new Player(inputHand);
+		int[] discardCards = new int[]{1,2,3};
+		int[] playerCards, someCards;
+		
+		player.discard(discardCards);
+		
+		playerCards = player.getCards();
+		someCards = new int[]{0, -1,-1,-1,49};
+		
+		assertTrue(Arrays.equals(playerCards, someCards));		
+	}
+	
+	@Test
+	public void testReplace(){
+		String inputHand = "OneHearts TwoHearts AceSpades KingDiamonds EightClubs";
+		Player player = new Player(inputHand);
+		int[] discardCards = new int[]{1,2,3};
+		int[] replacements = new int[]{20,21,22};
+		int[] playerCards, someCards;
+		
+		player.discard(discardCards);
+		player.replace(replacements);
+		
+		playerCards = player.getCards();
+		someCards = new int[]{0, 20,21,22,49};
+		
+		assertTrue(Arrays.equals(playerCards, someCards));	
+	}
 }

@@ -10,6 +10,7 @@ import poker.*;
 
 public class PokerTest {
 
+	
 	@Test
 	public void testStringToHand(){
 		Game game = new Game();
@@ -114,5 +115,74 @@ public class PokerTest {
 		game.addPlayer(0, inputHand1);
 		
 		assertTrue(game.addPlayer(1, inputHand2) == 0);		
+	}
+	
+	@Test
+	public void testStringToPlayer(){
+		Game game = new Game();
+		String input;
+		
+		input = "0, OneHearts TwoHearts AceSpades KingDiamonds EightClubs";					
+		
+		assertTrue(game.stringToPlayer(input) == 0);	
+	}
+	
+	@Test
+	public void testStringToPlayerIvalid(){
+		Game game = new Game();
+		String input;
+		
+		input = "OneHearts TwoHearts AceSpades KingDiamonds EightClubs, 0";					
+		
+		assertTrue(game.stringToPlayer(input) == -1);	
+	}
+	
+	@Test 
+	public void testTooManyCards(){
+		Game game = new Game();
+		String input;
+		
+		input = "0, OneHearts TwoHearts AceSpades KingDiamonds EightClubs AceDiamonds";					
+		
+		assertTrue(game.stringToPlayer(input) == -1);	
+	}
+	
+	@Test 
+	public void testTooFewCards(){
+		Game game = new Game();
+		String input;
+		
+		input = "0, OneHearts TwoHearts AceSpades";					
+		
+		assertTrue(game.stringToPlayer(input) == -1);	
+	}
+	
+	@Test
+	public void testCorrectCardName(){
+		Game game = new Game();
+		String input;
+		
+		input = "0, OneHearts MayHearts AceSpades KingDiamonds EightClubs";					
+		
+		assertTrue(game.stringToPlayer(input) == -1);	
+	}
+	
+	@Test
+	public void testAmountOfPlayers(){
+		Game game = new Game();
+		String input1, input2, input3, input4, input5;
+		
+		input1 = "0, OneHearts TwoHearts ThreeHearts FourHearts FiveHearts";
+		input2 = "1, SixHearts SevenHearts EightHearts NineHearts TenHearts";
+		input3 = "2, OneSpades TwoSpades ThreeSpades FourSpades FiveSpades";
+		input4 = "3, SixSpades SevenSpades EightSpades NineSpades TenSpades";
+		input5 = "4, OneDiamonds TwoDiamonds ThreeDiamonds FourDiamonds FiveDiamonds";
+		
+		game.stringToPlayer(input1);
+		game.stringToPlayer(input2);
+		game.stringToPlayer(input3);
+		assertTrue(game.stringToPlayer(input4) == 0);
+		
+		assertTrue(game.stringToPlayer(input5) == -1);	
 	}
 }

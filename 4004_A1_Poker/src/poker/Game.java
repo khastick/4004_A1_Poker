@@ -174,11 +174,37 @@ public class Game {
 		reader.close();
 	}
 	
+	public int stringToPlayer(String input){
+		String[] inputSplit;
+		int ID;
+		String hand;
+		
+		inputSplit = input.split(",");
+		
+		if(inputSplit[0].length() > 1){
+			return -1;
+		}
+		ID = Integer.parseInt(inputSplit[0]);
+		
+		hand = inputSplit[1].trim();
+		
+		if(addPlayer(ID, hand) == -1){
+			return -1;
+		}
+		
+		return 0;
+	}
+	
 	public int addPlayer(int aId, String aHand){
 		int[] tHand;		
 		Player player;
 		
+		if(players.size() == 4){
+			return -1;
+		}
+		
 		tHand = StringToHand(aHand);
+		
 		
 		if(tHand[0] == -1){			
 			return -1;
